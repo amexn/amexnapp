@@ -26,7 +26,7 @@ namespace Track.Web.Controllers
 
             var events = objEventRepository.GetAllPaging(); //returns IQueryable<Product> representing an unknown number of products. a thousand maybe?
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var OnePageOfEvents = events.ToPagedList(pageNumber, UserDefinedPageSize.DefaultPageSize); // will only contain 10 products max because of the pageSize
+            var OnePageOfEvents = events.ToPagedList(pageNumber, UserDefinedPageSize.TestPageSize); // will only contain 10 products max because of the pageSize
             ViewBag.OnePageOfEvents = OnePageOfEvents;
             return View();
         }
