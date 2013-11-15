@@ -21,13 +21,13 @@ namespace Track.Web.Controllers
 
         public Event Get(int id)
         {
-            //objEventRepository.Drop();
+            objEventRepository.Drop();
             var item = new Event();
           
             item.SessionID = System.Guid.NewGuid().ToString();
             item.EventTypeID = System.Guid.NewGuid().ToString();
             item.TimeStamp = DateTime.UtcNow.ToString();
-           
+            item.CreationDateTime = DateTime.UtcNow.ToString();
 
             item.EventKeyTypes.Add(new EventKeyType{ EventKeyTypeID="Type1", EventKeyTypeValue="value1"});
             item.EventKeyTypes.Add(new EventKeyType { EventKeyTypeID = "Type2", EventKeyTypeValue = "value2" });
