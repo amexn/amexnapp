@@ -13,6 +13,7 @@ namespace Track.Web.Controllers
     {
         MongoDbRepository<Event> objEventRepository = new MongoDbRepository<Event>();
 
+
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
@@ -22,15 +23,15 @@ namespace Track.Web.Controllers
         {
             //objEventRepository.Drop();
             var item = new Event();
-            item.Id = ObjectId.GenerateNewId().ToString();
+          
             item.SessionID = System.Guid.NewGuid().ToString();
             item.EventTypeID = System.Guid.NewGuid().ToString();
             item.TimeStamp = DateTime.UtcNow.ToString();
-            item.CreationDateTime = DateTime.UtcNow.ToString();
+           
 
             item.EventKeyTypes.Add(new EventKeyType{ EventKeyTypeID="Type1", EventKeyTypeValue="value1"});
-            
-
+            item.EventKeyTypes.Add(new EventKeyType { EventKeyTypeID = "Type2", EventKeyTypeValue = "value2" });
+            item.EventKeyTypes.Add(new EventKeyType { EventKeyTypeID = "Type3", EventKeyTypeValue = "value3" });
             Event objevent = objEventRepository.Insert(item);
 
            
@@ -38,10 +39,22 @@ namespace Track.Web.Controllers
             return objevent;
         }
 
-        public HttpResponseMessage Post(Event value)
+        public HttpResponseMessage Post(Log value)
         {
-            
-            Event objevent = objEventRepository.Insert(value);
+            Event objevent = new Event() { 
+            CreationDateTime = DateTime.UtcNow.ToString(),
+            EventTypeID= value.LogTypeID,
+            SessionID=value.SessionID,
+            TimeStamp=value.TimeStamp
+
+            };
+            // add key values
+            foreach (var item in value.LogKeyTypes)
+            {
+                objevent.EventKeyTypes.Add(new EventKeyType {EventKeyTypeID= item.LogKeyTypeID,EventKeyTypeValue= item.LogKeyTypeValue });
+            }
+
+            objEventRepository.Insert(objevent);
             var response = Request.CreateResponse<Event>(HttpStatusCode.Created, objevent);
              string uri = Url.Link("DefaultApi", new { id = objevent.Id });
             response.Headers.Location = new Uri(uri);

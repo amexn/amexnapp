@@ -13,17 +13,18 @@
 <table>
     <tr>
          <th>
-            ID
+             Log ID
         </th>
         <th>
-            EventTypeID
+            LogTypeID
         </th>
         <th>
-            UDID
+            SessionID
         </th>
         <th>
             TimeStamp
         </th>
+        <th>Log Values</th>
         <th>
             CreationDateTime
         </th>
@@ -40,10 +41,17 @@
             @item.EventTypeID
         </td>
         <td>
-            @item.UDID
+            @item.SessionID
         </td>
         <td>
             @item.TimeStamp
+        </td>
+        <td >
+            @foreach (var log in item.EventKeyTypes)
+            {
+               <span>@log.EventKeyTypeID </span>@: 	&#32;	&#58;  	&#32;<span>@log.EventKeyTypeValue</span>  <br />
+            }
+
         </td>
         <td>
             @item.CreationDateTime

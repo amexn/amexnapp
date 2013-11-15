@@ -26,11 +26,7 @@ namespace Track.Core.Models
         public string EventKeyTypeValue { get; set; }
     }
 
-    public interface IEventRepository
-    {
-        IEnumerable<Event> GetAllContacts();
-        Event AddContact(Event item);
-    }
+   
  
  
 

@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using System;
@@ -30,6 +31,9 @@ namespace Track.Core.Repository
 
         public TEntity Insert(TEntity entity)
         {
+            entity.Id = ObjectId.GenerateNewId().ToString();
+         
+
             collection.Insert(entity);
             return entity;
         }
