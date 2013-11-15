@@ -20,23 +20,27 @@ namespace Track.Web.Controllers
 
         public Event Get(int id)
         {
+            //objEventRepository.Drop();
             var item = new Event();
             item.Id = ObjectId.GenerateNewId().ToString();
-            item.UDID = System.Guid.NewGuid().ToString();
+            item.SessionID = System.Guid.NewGuid().ToString();
             item.EventTypeID = System.Guid.NewGuid().ToString();
             item.TimeStamp = DateTime.UtcNow.ToString();
             item.CreationDateTime = DateTime.UtcNow.ToString();
+
+            item.EventKeyTypes.Add(new EventKeyType{ EventKeyTypeID="Type1", EventKeyTypeValue="value1"});
+            
+
             Event objevent = objEventRepository.Insert(item);
 
-
+           
           
             return objevent;
         }
 
         public HttpResponseMessage Post(Event value)
         {
-
-
+            
             Event objevent = objEventRepository.Insert(value);
             var response = Request.CreateResponse<Event>(HttpStatusCode.Created, objevent);
              string uri = Url.Link("DefaultApi", new { id = objevent.Id });

@@ -60,7 +60,7 @@ namespace Track.Core.Repository
             return collection.RemoveAll().DocumentsAffected > 0;
 
         }
-        public bool Drop(TEntity entity)
+        public bool Drop()
         {
             return collection.Drop().Ok;
 

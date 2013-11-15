@@ -8,7 +8,7 @@ namespace Track.Core.Models
         
         
         public string EventTypeID { get; set; }
-        public string UDID { get; set; }
+        public string SessionID { get; set; }
         public string TimeStamp { get; set; }
         public string CreationDateTime { get; set; }
         public List<EventKeyType> EventKeyTypes { get; set; }
