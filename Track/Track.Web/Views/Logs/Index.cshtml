@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using PagedList.Mvc;@*import this so we get our HTML Helper*@
+@using PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+
+ <!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/css/PagedList.css" rel="stylesheet" type="text/css" />
+
+<table>
+    <tr>
+         <th>
+            ID
+        </th>
+        <th>
+            EventTypeID
+        </th>
+        <th>
+            UDID
+        </th>
+        <th>
+            TimeStamp
+        </th>
+        <th>
+            CreationDateTime
+        </th>
+        
+        
+    </tr>
+@foreach (var item in ViewBag.OnePageOfEvents)
+{
+    <tr>
+        <td>
+            @item.Id
+        </td>
+        <td>
+            @item.EventTypeID
+        </td>
+        <td>
+            @item.UDID
+        </td>
+        <td>
+            @item.TimeStamp
+        </td>
+        <td>
+            @item.CreationDateTime
+        </td>
+        
+    </tr>
+}
+</table>
+<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+@Html.PagedListPager( (IPagedList)ViewBag.OnePageOfEvents, page => Url.Action("Index", new { page }) )

@@ -80,7 +80,10 @@ namespace Track.Core.Repository
         {
             return collection.FindAllAs<TEntity>().ToList();
         }
-
+        public IEnumerable<TEntity> GetAllPaging()
+        {
+            return collection.FindAllAs<TEntity>().ToList();
+        }
         public TEntity GetById(Guid id)
         {
             return collection.FindOneByIdAs<TEntity>(id);

@@ -2,6 +2,14 @@
 namespace Track.Core.Helpers
 {
 
+    public static class UserDefinedPageSize
+    {
+
+        public static int TestPageSize = 2;
+        public static int DefaultPageSize = 10;
+      
+
+    }
     
     
     #region Enumerators
@@ -40,8 +48,8 @@ namespace Track.Core.Helpers
     }
 
 
-  
-    
+
+
     
     
     
